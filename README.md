@@ -29,18 +29,24 @@
 
 （有兴趣的可以改成百度、腾讯、讯飞的 api 试试）。
 
-使用方法很简单：用 python 运行 `run.py` 后，按下 `Caps Lock`（也就是大写锁定键）超过 0.3 秒后，就会开始用阿里云的 api 进行语音识别，松开按键后，会将识别结果自动输入。
+使用方法很简单：运行程序后，按下 `Caps Lock`（也就是大写锁定键）超过 0.3 秒后，就会开始用阿里云的 api 进行语音识别，松开按键后，会将识别结果自动输入。
+
+因为使用了阿里云的 api，所以需要用户自己到阿里云申请，再填到 `token.ini` 中才能正常使用。
 
 对于聊天时候进行快捷输入、写代码时快速加入中文注释非常的方便。
 
 
 ### 视频演示
 
-请到 HacPai 帖子中进行查看：[Caps Wirter 发布：按住大写锁定键，进行语音识别输入](https://hacpai.com/article/1594371212477)
+请到 HacPai 帖子中进行查看：[Caps Wirter 发布：按住大写锁定键，进行语音识别输入](https://hacpai.com/article/1594371212477) 
 
-### 安装使用
+### 开箱即用
 
-本工具是一个python脚本，依赖于以下模块：
+小白用户，只需要在 Release 界面下载打包好的 exe 文件，运行，会在同级目录生成一个 `token.ini` 文件，在 `token.ini` 中填入你阿里云拥有 **管理智能语音交互（NLS）** 权限的 **RAM访问控制** 用户的 **Accesskey Id**、**Accesskey Secret** 和智能语音交互语音识别项目的 **appkey** ，就可以正常使用了。详细步骤之后我录一个视频
+
+### 开发使用
+
+本工具是一个python脚本，上面小白下载的 Release 其实是用 pyinstaller 导出的 exe 文件，如果你想在源码基础上使用，就需要安装以下模块：
 
 - keyboard
 - pyaudio
@@ -53,11 +59,11 @@
 - pyaudio 在 windows 上不是太好安装，可以先到 [这个链接](https://www.lfd.uci.edu/~gohlke/pythonlibs) 下载 pyaudio 对应版本的 whl 文件，再用 pip 安装
 - alibabacloud-nls-python-sdk 不是通过 python 安装，而是通过 [阿里云官方文档的方法](https://help.aliyun.com/document_detail/120693.html) 进行安装。
 
-另外，需要在 `run.py` 中填入阿里云拥有 **管理智能语音交互（NLS）** 权限的 **RAM访问控制** 用户的 **accessID**、**accessKey** 和智能语音交互语音识别项目的 **appkey** 。
-
-做完以上步骤后，只要运行 `run.py` 就可以用了！
+另外，需要在 `token.ini` 中填入阿里云拥有 **管理智能语音交互（NLS）** 权限的 **RAM访问控制** 用户的 **accessID**、**accessKey** 和智能语音交互语音识别项目的 **appkey** 。
 
 本文件夹内有一个 `安装指南` 文件夹，在里面可以找到详细的安装指南，还包括了提前下载的 alibabacloud-nls-python-sdk 和 pyaudio 的 whl 文件。
+
+用 python 运行 `run.py` 后，按下 `Caps Lock`（也就是大写锁定键）超过 0.3 秒后，就会开始用阿里云的 api 进行语音识别，松开按键后，会将识别结果自动输入。
 
 ### 后话
 

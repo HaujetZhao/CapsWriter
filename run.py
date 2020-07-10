@@ -14,10 +14,6 @@ from aliyunsdkcore.client import AcsClient
 from aliyunsdkcore.request import CommonRequest
 import configparser
 
-""" 在这里填写你的 API 设置 """
-accessID = "xxxxxxxxxxxxxxxxxxxxxxxx"
-accessKey = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-appkey = 'xxxxxxxxxxxxxxxx'
 
 
 """pyaudio参数"""
@@ -48,8 +44,11 @@ class MyCallback(SpeechRecognizerCallback):
         print('结果: %s' % (
             message['payload']['result']))
         result = message['payload']['result']
-        if result[-1] == '。': # 如果最后一个符号是句号，就去掉。
-            result = result[0:-1]
+        try:
+            if result[-1] == '。': # 如果最后一个符号是句号，就去掉。
+                result = result[0:-1]
+        except Exception as e:
+            pass
         keyboard.write(result) # 输入识别结果
         keyboard.press_and_release('caps lock') # 再按下大写锁定键，还原大写锁定
     def on_task_failed(self, message):
@@ -59,22 +58,16 @@ class MyCallback(SpeechRecognizerCallback):
         pass
 
 def get_token():
-    if not os.path.exists('token.ini'):
-        init_id = """[Token]
-id = 0000000000000000000
-expiretime = 0000000000"""
-        fp = open("token.ini",'w')
-        fp.write(init_id)
-        fp.close()
 
     config = configparser.ConfigParser()
     config.read_file(open('token.ini'))
     token = config.get("Token","Id")
     expireTime = config.get("Token","ExpireTime")
+    accessID = config.get("Token","accessKeyId")
+    accessKey = config.get("Token","accessKeySecret")
     # 要是 token 还有 5 秒过期，那就重新获得一个。
     if (int(expireTime) - time.time()) < 5 :
         # 创建AcsClient实例
-        global accessID, accessKey
         client = AcsClient(
         accessID, # 填写 AccessID
         accessKey, # 填写 AccessKey
@@ -173,13 +166,35 @@ def recoder(recognizer, p):
 
 if __name__ == '__main__':
 
-    print('开始程序')
+    print('\r\n开始程序\r\n')
+
+    if not os.path.exists('token.ini'):
+        init_id = """[Token]
+id = 0000000000000000000
+expiretime = 0000000000
+accessKeyId = 000000
+accessKeySecret = 000000
+appkey = 00000"""
+        fp = open("token.ini",'w')
+        fp.write(init_id)
+        fp.close()
+        input("""\r\n        检测到没有配置文件，所以刚刚已在同级目录生成了 token.ini 配置文件，\r\n
+        请打开 token.ini 配置文件，\r\n
+        然后填入阿里云的 accesskeyid 和 accesskeysecret, 以及你的语音识别项目的 appkey，\r\n
+        再回到本界面，按任意键后，回车继续\r\n
+        
+        如果下面出错了，那么就很有可能是 accesskeyid 、accesskeysecret 或 appkey 填错了\r\n""")
+    config = configparser.ConfigParser()
+    config.read_file(open('token.ini'))
+    appkey = config.get("Token","appkey")
 
     client = ali_speech.NlsClient()
     client.set_log_level('WARNING') # 设置 client 输出日志信息的级别：DEBUG、INFO、WARNING、ERROR
 
     recognizer = get_recognizer(client, appkey)
     p = pyaudio.PyAudio()
+
+    print("""\r\n初始化完成，现在可以将本工具最小化，在需要输入的界面，按住 CapsLock 键 0.3 秒后开始说话，松开 CapsLock 键后识别结果会自动输入\r\n""")
 
     keyboard.hook_key('caps lock', on_hotkey)
     print('{}//:按住 CapsLock 键 0.3 秒后开始说话...'.format(count), end=' ')
