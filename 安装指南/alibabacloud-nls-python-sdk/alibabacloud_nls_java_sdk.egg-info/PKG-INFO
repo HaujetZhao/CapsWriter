@@ -1,0 +1,19 @@
+Metadata-Version: 1.1
+Name: alibabacloud-nls-java-sdk
+Version: 2.0.0
+Summary: ali_speech python sdk
+Home-page: https://github.com/aliyun/alibabacloud-nls-python-sdk.git
+Author: Alibaba Cloud NLS Team
+Author-email: nls-system-client@list.alibaba-inc.com
+License: Apache License 2.0
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Software Development

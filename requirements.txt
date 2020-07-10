@@ -1,0 +1,5 @@
+setuptools
+pyaudio
+keyboard
+aliyunsdkcore
+configparser
