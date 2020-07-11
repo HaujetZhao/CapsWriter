@@ -166,7 +166,19 @@ def recoder(recognizer, p):
 
 if __name__ == '__main__':
 
-    print('\r\n开始程序\r\n')
+    print("""\r\nCaps Writer 开始运行
+
+开源发布地址：https://github.com/HaujetZhao/CapsWriter
+
+下载地址：https://github.com/HaujetZhao/CapsWriter/releases
+
+视频教程地址：https://www.bilibili.com/video/BV1qK4y1s7Fb/
+
+作者：淳帅二代（HaujetZhao）
+
+软件基于 MIT 协议
+
+""")
 
     if not os.path.exists('token.ini'):
         init_id = """[Token]
@@ -182,7 +194,6 @@ appkey = 00000"""
         请打开 token.ini 配置文件，\r\n
         然后填入阿里云的 accesskeyid 和 accesskeysecret, 以及你的语音识别项目的 appkey，\r\n
         再回到本界面，按任意键后，回车继续\r\n
-        
         如果下面出错了，那么就很有可能是 accesskeyid 、accesskeysecret 或 appkey 填错了\r\n""")
     config = configparser.ConfigParser()
     config.read_file(open('token.ini'))
