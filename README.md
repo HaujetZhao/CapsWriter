@@ -36,11 +36,13 @@
 
 请到 HacPai 帖子中进行查看：[Caps Wirter 发布：按住大写锁定键，进行语音识别输入](https://hacpai.com/article/1594371212477) 
 
+或者到 Bilibili 查看：[ Caps Writer（电脑端语音输入工具）使用教程 ](https://www.bilibili.com/video/BV1qK4y1s7Fb/)
+
 ## 🔮 开箱即用
 
 小白用户，只需要在 [Release](https://github.com/HaujetZhao/CapsWriter/releases) 界面下载打包好的 exe 文件，运行，会在同级目录生成一个 `token.ini` 文件，在 `token.ini` 中填入你阿里云拥有 **管理智能语音交互（NLS）** 权限的 **RAM访问控制** 用户的 **Accesskey Id**、**Accesskey Secret** 和智能语音交互语音识别项目的 **appkey** ，就可以正常使用了。
 
-详细申请、填写 API 的步骤请到 [Caps Wirter 发布：按住大写锁定键，进行语音识别输入](https://hacpai.com/article/1594371212477) 查看视频教程
+详细申请、填写 API 的步骤请到 [Caps Wirter 发布：按住大写锁定键，进行语音识别输入](https://hacpai.com/article/1594371212477)  或到 [ Caps Writer（电脑端语音输入工具）使用教程 ](https://www.bilibili.com/video/BV1qK4y1s7Fb/) 查看视频教程
 
 ### 🛠 开发使用
 
