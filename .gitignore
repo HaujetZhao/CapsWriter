@@ -3,3 +3,4 @@ dist*
 __pycache__*
 run.spec
 alispeech.log
+*.wav
