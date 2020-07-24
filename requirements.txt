@@ -1,5 +1,5 @@
 setuptools
 pyaudio
 keyboard
-aliyunsdkcore
+aliyun-python-sdk-core==2.13.3
 configparser

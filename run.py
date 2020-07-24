@@ -138,15 +138,16 @@ def process():
 def recoder(recognizer, p):
     global run
     try:
+        ret = recognizer.start()
+        if ret < 0:
+            return ret
         stream = p.open(channels=CHANNELS,
                 format=FORMAT,
                 rate=RATE,
                 input=True,
                 frames_per_buffer=CHUNK)
         print('\r{}//:在听了，说完了请松开 CapsLock 键...'.format(count), end=' ')
-        ret = recognizer.start()
-        if ret < 0:
-            return ret
+        
         while run:
             data = stream.read(CHUNK)
             ret = recognizer.send(data)

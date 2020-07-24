@@ -4,3 +4,4 @@ __pycache__*
 run.spec
 alispeech.log
 *.wav
+token.ini
