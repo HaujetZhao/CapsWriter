@@ -1,0 +1,42 @@
+/*参考这里：https://doc.qt.io/qt-5/stylesheet-reference.html*/
+
+
+/*切换到分割视频 Tab，里面有几个上面带字的功能框，那些框框就是 QGroupBox */
+QGroupBox{
+	border: 1px solid #ccc;
+	border-radius:6px;
+	margin-top: 2ex;
+	margin-bottom: 0.5ex;
+	padding: 0.3em 0.4em 0.4em 0.3em; /* 上 右 下 左*/
+}
+
+/* 这就是 QGroupBox 上面的标题 */
+QGroupBox:title {  
+	color: #005980;
+	subcontrol-origin: margin;
+	margin-top: 0.5ex;
+	left: 2ex;
+}
+
+/*
+QPushButton {
+    border: 2px solid #8f8f91;
+    border-radius: 6px;
+	padding: 1em 0.4em 1em 0.3em; /* 上 右 下 左*
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 #f6f7fa, stop: 1 #dadbde);
+    min-width: 80px;
+}
+
+QPushButton:pressed {
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 #dadbde, stop: 1 #f6f7fa);
+}
+
+QPushButton:flat {
+    border: none; /* no border for a flat push button *
+}
+
+QPushButton:default {
+    border-color: navy; /* make the default button prominent *
+}*/
