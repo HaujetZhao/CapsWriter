@@ -6,7 +6,7 @@ pyinstaller --hidden-import sqlite3  --noconfirm   -i "../src/misc/icon.ico" "..
 
 echo d | xcopy /y /s .\dist\rely .\dist\__init__
 
-ren .\dist\__init__\__init__.exe  "_CapsWriterè¯­éŸ³è¾“å…¥å·¥å…·.exe"
+ren .\dist\__init__\__init__.exe  "_CapsWriterÓïÒôÊäÈë¹¤¾ß.exe"
 
 move .\dist\__init__ .\dist\CapsWriter
 
