@@ -19,8 +19,8 @@ def createDB():
                                             value text
                                             )''')
     else:
-        print('偏好设置表单已存在')
-    #
+        # print('偏好设置表单已存在')
+        pass
     result = cursor.execute(f'select * from sqlite_master where name = "{语音引擎表单名}";')
     if result.fetchone() == None:
         cursor.execute(f'''create table {语音引擎表单名} (
@@ -33,7 +33,8 @@ def createDB():
                                     AccessKeySecret text
                                     )''')
     else:
-        print('语音引擎表单名已存在')
+        # print('语音引擎表单名已存在')
+        pass
     #
     # result = cursor.execute(f'select * from sqlite_master where name = "{皮肤表单名}";')
     # if result.fetchone() == None:

@@ -5,10 +5,9 @@ __pycache__
 *.mp4
 *.mkv
 *.wav
-.DS_Store
 .idea
+.DS_Store
 *info
-
 *database.db
 *test.py
 *.7z
@@ -18,3 +17,4 @@ __pycache__
 *.afphoto
 icon*.png
 视频封面.png
+

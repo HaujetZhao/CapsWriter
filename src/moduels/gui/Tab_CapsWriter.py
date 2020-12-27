@@ -3,11 +3,12 @@
 from PySide2.QtWidgets import *
 from PySide2.QtGui import *
 from PySide2.QtCore import *
-import os, re, subprocess, time
+import sys, os, re, subprocess, time
 
 import pyaudio
 
 # from moduels.component.QLEdit_FilePathQLineEdit import QLEdit_FilePathQLineEdit
+from moduels.component.Stream import Stream
 from moduels.component.NormalValue import 常量
 from moduels.component.QEditBox_StdoutBox import QEditBox_StdoutBox
 # from moduels.component.SpaceLine import QHLine, QVLine
@@ -53,7 +54,11 @@ class Tab_CapsWriter(QWidget):
         self.停止按钮 = QPushButton('停止 CapsWriter')
         self.启停按钮Box布局 = QHBoxLayout()
 
+        self.标准输出流 = Stream()
+
     def initLayouts(self):
+        self.标准输出流.newText.connect(self.更新控制台输出)
+
         self.引擎选择Box布局.addWidget(self.引擎选择下拉框)
 
         self.控制台输出Box布局.addWidget(self.控制台输出框)
@@ -78,12 +83,28 @@ class Tab_CapsWriter(QWidget):
     def 更新控制台输出(self, 文本):
         self.控制台输出框.print(文本)
 
-
     def initValues(self):
         self.引擎线程 = None
         # self.aliClient = ali_speech.NlsClient()
         # self.aliClient.set_log_level('WARNING')  # 设置 client 输出日志信息的级别：DEBUG、INFO、WARNING、ERROR
         self.停止按钮.setDisabled(True)
+        sys.stdout = self.标准输出流
+        print("""\n软件介绍：
+
+CapsWriter，顾名思义，就是按下大写锁定键来打字的工具。它的具体作用是：当你按下键盘上的大写锁定键后，软件开始语音识别，当你松开大写锁定键时，识别的结果就可以立马上屏。
+
+目前软件内置了对阿里云一句话识别 API 的支持。如果你要使用，就需要先在阿里云上实名认证，申请语音识别 API，在设置页面添加一个语音识别引擎。
+
+具体申请阿里云 API 的方法，可以参考我这个视频：https://www.bilibili.com/video/BV1qK4y1s7Fb/
+
+添加上引擎后，在当前页面选择一个引擎，点击启用按钮，就可以进行语音识别了！嗯
+
+启用后，在实际使用中，只要按下 CapsLock 键，软件就会立刻开始录音：
+
+    如果只是单击 CapsLock 后松开，录音数据会立刻被删除；
+    如果按下 CapsLock 键时长超过 0.3 秒，就会开始连网进行语音识别，松开 CapsLock 键时，语音识别结果会被立刻输入。
+
+所以你只需要按下 CapsLock 键，无需等待，就可以开始说话，因为当你按下按下 CapsLock 键的时候，程序就开始录音了。说完后，松开，识别结果立马上屏。\r\n""")
 
     def 启动引擎(self):
         if self.引擎线程 != None: return
