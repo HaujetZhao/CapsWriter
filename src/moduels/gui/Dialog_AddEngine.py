@@ -33,6 +33,9 @@ class Dialog_AddEngine(QDialog):
         self.表格布局 = QFormLayout()
         self.按钮横向布局 = QHBoxLayout()
 
+        self.Api输入校验器 = QRegExpValidator()
+
+
     def initSlots(self):
         self.服务商选择框.currentTextChanged.connect(self.服务商变化)
 
@@ -67,6 +70,11 @@ class Dialog_AddEngine(QDialog):
         self.setWindowIcon(QIcon(常量.图标路径))
         self.setWindowTitle(self.tr('添加或更新 Api'))
         self.setWindowModality(Qt.NonModal)
+
+        self.Api输入校验器.setRegExp(QRegExp(r'\w+'))
+        self.appKey输入框.setValidator(self.Api输入校验器)
+        self.accessKeyId输入框.setValidator(self.Api输入校验器)
+        self.AccessKeySecret输入框.setValidator(self.Api输入校验器)
 
         if self.列表.currentItem():
             已选中的列表项 = self.列表.currentItem().text()
