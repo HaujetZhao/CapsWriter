@@ -1,7 +1,10 @@
 # -*- coding: UTF-8 -*-
+import sys
 
-from PySide2.QtWidgets import *
-from PySide2.QtGui import *
+from PySide2.QtWidgets import QTextEdit
+from PySide2.QtGui import QTextCursor
+
+from moduels.component.Stream import Stream
 
 # 命令输出窗口中的多行文本框
 class QEditBox_StdoutBox(QTextEdit):
@@ -9,6 +12,9 @@ class QEditBox_StdoutBox(QTextEdit):
     def __init__(self, parent=None):
         super(QEditBox_StdoutBox, self).__init__(parent)
         self.setReadOnly(True)
+        self.标准输出流 = Stream()
+        self.标准输出流.newText.connect(self.print)
+        sys.stdout = self.标准输出流
 
     def print(self, text):
         try:

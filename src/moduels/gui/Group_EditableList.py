@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-from PySide2.QtWidgets import *
+from PySide2.QtWidgets import QGroupBox, QLineEdit, QPushButton, QGridLayout
 from moduels.gui.List_List import List_List
 
 # 添加预设对话框

@@ -1,8 +1,9 @@
 # -*- coding: UTF-8 -*-
 
-from PySide2.QtWidgets import *
-from PySide2.QtCore import *
-from PySide2.QtGui import *
+from PySide2.QtWidgets import QSystemTrayIcon, QMenu, QApplication, QAction
+# from PySide2.QtCore import *
+from PySide2.QtGui import QIcon
+from PySide2.QtCore import Qt
 
 import sys
 

@@ -1,8 +1,6 @@
 import webbrowser
-from PySide2.QtCore import *
-from PySide2.QtGui import *
-from PySide2.QtSql import *
-from PySide2.QtWidgets import *
+from PySide2.QtCore import Signal
+from PySide2.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QGridLayout, QGroupBox, QPushButton, QCheckBox
 from moduels.component.NormalValue import 常量
 from moduels.gui.Group_EditableList import Group_EditableList
 from moduels.gui.Dialog_AddEngine import  Dialog_AddEngine

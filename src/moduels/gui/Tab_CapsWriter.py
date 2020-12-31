@@ -1,29 +1,16 @@
 # -*- coding: UTF-8 -*-
 
-from PySide2.QtWidgets import *
-from PySide2.QtGui import *
-from PySide2.QtCore import *
-import sys, os, re, subprocess, time
+from PySide2.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QGroupBox, QPushButton
+# from PySide2.QtGui import *
+from PySide2.QtCore import Signal
+import os, re, subprocess, time
 
 import pyaudio
 
-# from moduels.component.QLEdit_FilePathQLineEdit import QLEdit_FilePathQLineEdit
-from moduels.component.Stream import Stream
+
 from moduels.component.NormalValue import 常量
 from moduels.component.QEditBox_StdoutBox import QEditBox_StdoutBox
-# from moduels.component.SpaceLine import QHLine, QVLine
 from moduels.thread.Thread_AliEngine import Thread_AliEngine
-# from moduels.thread.Thread_GenerateSkins import Thread_GenerateSkins
-# from moduels.thread.Thread_ExtractAllSkin import Thread_ExtractAllSkin
-
-# from moduels.function.applyTemplate import applyTemplate
-# from moduels.function.openSkinSourcePath import openSkinSourcePath
-#
-# from moduels.gui.Dialog_AddSkin import Dialog_AddSkin
-# from moduels.gui.Dialog_DecompressSkin import Dialog_DecompressSkin
-# from moduels.gui.Dialog_RestoreSkin import Dialog_RestoreSkin
-# from moduels.gui.Group_EditableList import Group_EditableList
-# from moduels.gui.VBox_RBtnContainer import VBox_RBtnContainer
 from moduels.gui.Combo_EngineList import Combo_EngineList
 
 
@@ -54,10 +41,10 @@ class Tab_CapsWriter(QWidget):
         self.停止按钮 = QPushButton('停止 CapsWriter')
         self.启停按钮Box布局 = QHBoxLayout()
 
-        self.标准输出流 = Stream()
+
 
     def initLayouts(self):
-        self.标准输出流.newText.connect(self.更新控制台输出)
+
 
         self.引擎选择Box布局.addWidget(self.引擎选择下拉框)
 
@@ -85,10 +72,8 @@ class Tab_CapsWriter(QWidget):
 
     def initValues(self):
         self.引擎线程 = None
-        # self.aliClient = ali_speech.NlsClient()
-        # self.aliClient.set_log_level('WARNING')  # 设置 client 输出日志信息的级别：DEBUG、INFO、WARNING、ERROR
         self.停止按钮.setDisabled(True)
-        sys.stdout = self.标准输出流
+
         print("""\n软件介绍：
 
 CapsWriter，顾名思义，就是按下大写锁定键来打字的工具。它的具体作用是：当你按下键盘上的大写锁定键后，软件开始语音识别，当你松开大写锁定键时，识别的结果就可以立马上屏。

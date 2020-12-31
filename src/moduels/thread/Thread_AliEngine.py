@@ -10,9 +10,8 @@ import time
 
 import ali_speech
 
-from PySide2.QtWidgets import *
-from PySide2.QtGui import *
-from PySide2.QtCore import *
+from PySide2.QtCore import QThread, Signal
+from PySide2.QtWidgets import QApplication
 
 from moduels.component.NormalValue import 常量
 from moduels.function.getAlibabaRecognizer import getAlibabaRecognizer
@@ -40,6 +39,7 @@ class Thread_AliEngine(QThread):
 
     def __init__(self, 引擎名称, parent=None):
         super().__init__(parent)
+        self.持续录音 = True
         self.正在运行 = 0
         self.引擎名称 = 引擎名称
         self.得到引擎信息()
@@ -98,7 +98,8 @@ class Thread_AliEngine(QThread):
             self.识别中 = True
             try:
                 self.data = []
-                threading.Thread(target=self.录音线程, args=[self.p]).start()  # 开始录音
+                if not self.持续录音: # 如果录音进程不是被持续开启着，那么就需要在这里主动开启
+                    threading.Thread(target=self.录音线程, args=[self.p]).start()  # 开始录音
                 threading.Thread(target=self.识别线程).start()  # 开始识别
 
             except:
@@ -110,6 +111,7 @@ class Thread_AliEngine(QThread):
         else:
             # print(event.event_type)
             pass
+
     def 为下一次输入准备识别器(self):
         self.识别器 = getAlibabaRecognizer(self.client,
                                         self.appKey,
@@ -140,11 +142,20 @@ class Thread_AliEngine(QThread):
                         rate=self.RATE,
                         input=True,
                         frames_per_buffer=self.CHUNK)
+        if self.持续录音:
+            while self.isRunning():
+                if self.识别中:
+                    self.录音数据存入内存(stream)
+                else:
+                    stream.read(self.CHUNK)
+        else:
+            self.录音数据存入内存(stream)
 
-        # print('录制器准备完毕')
-        # 录音写入序号 = 1
+        stream.stop_stream()# print('停止录制流')
+        stream.close()
+
+    def 录音数据存入内存(self, stream):
         for i in range(5):
-            # self.访问录音数据的线程锁.acquire()
             if not self.识别中:
                 self.data = []
                 # self.访问录音数据的线程锁.release()
@@ -153,7 +164,6 @@ class Thread_AliEngine(QThread):
             self.data.append(stream.read(self.CHUNK))
             # print(f'录音{录音写入序号}，写入结束，时间 {time.time()}')
             # 录音写入序号 += 1
-            # self.访问录音数据的线程锁.release()
         # 在这里录下5个小片段，大约录制了0.32秒，如果这个时候松开了大写锁定键，就不打开连接。如果还继续按着，那就开始识别。
 
         while self.识别中:
@@ -168,9 +178,6 @@ class Thread_AliEngine(QThread):
         self.总共写入音频片段数 = len(self.data)
         # self.访问录音数据的线程锁.release()
         self.发送大写锁定键()  # 再按下大写锁定键，还原大写锁定
-        stream.stop_stream()# print('停止录制流')
-        stream.close()
-
 
     # 这边开始上传识别
     def 识别(self):
@@ -250,6 +257,8 @@ class Thread_AliEngine(QThread):
             return False
 
         self.p = pyaudio.PyAudio() # 在 QThread 中引入 PyAudio 会使得 PySide2 图形界面阻塞
+        if self.持续录音:
+            threading.Thread(target=self.录音线程, args=[self.p]).start()
 
         self.开始监听大写锁定键()
 

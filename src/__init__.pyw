@@ -6,9 +6,9 @@ os.chdir(os.path.dirname(os.path.abspath(__file__))) # 更改工作目录，指�
 sys.path.append(os.path.dirname(os.path.abspath(__file__))) # 将当前目录导入 python 寻找 package 和 moduel 的变量
 # os.environ['PATH'] += os.pathsep + os.path.abspath('./bin') # 将可执行文件的目录加入环境变量
 
-from PySide2.QtWidgets import *
-from PySide2.QtCore import *
-from PySide2.QtGui import *
+from PySide2.QtWidgets import QApplication
+from PySide2.QtCore import QCoreApplication
+from PySide2.QtGui import Qt
 
 from moduels.function.createDB import createDB # 引入检查和创建创建数据库的函数
 

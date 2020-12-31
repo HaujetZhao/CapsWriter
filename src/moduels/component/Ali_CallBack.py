@@ -1,10 +1,6 @@
 # -*- coding: UTF-8 -*-
-import json
-import os
-import pyaudio
-import threading
+
 import keyboard
-import time
 
 from ali_speech.callbacks import SpeechRecognizerCallback
 

@@ -1,12 +1,11 @@
 # -*- coding: UTF-8 -*-
 
-from PySide2.QtWidgets import *
-from PySide2.QtGui import *
+from PySide2.QtWidgets import QMainWindow, QTabWidget
+from PySide2.QtGui import QIcon, Qt
 
 from moduels.component.NormalValue import 常量
 
 from moduels.gui.Tab_CapsWriter import Tab_CapsWriter
-# from moduels.gui.Tab_Stdout import Tab_Stdout
 from moduels.gui.Tab_Config import Tab_Config
 from moduels.gui.Tab_Help import Tab_Help
 
@@ -24,7 +23,6 @@ class MainWindow(QMainWindow):
 
 
         # self.setWindowState(Qt.WindowMaximized)
-        # sys.stdout = Stream(newText=self.onUpdateText)
 
     def initElements(self):
         self.状态栏 = self.statusBar()

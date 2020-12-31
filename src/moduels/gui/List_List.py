@@ -1,8 +1,7 @@
 # -*- coding: UTF-8 -*-
 
-from PySide2.QtWidgets import *
-from PySide2.QtGui import *
-from PySide2.QtCore import *
+from PySide2.QtWidgets import QListWidget
+from PySide2.QtCore import Signal
 from moduels.component.NormalValue import 常量
 
 # 添加预设对话框
