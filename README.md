@@ -1,6 +1,11 @@
+
+# 此项目已废弃，不再维护，请使用 [CapsWriter-Offline](https://github.com/HaujetZhao/CapsWriter-Offline) 
+
+---
+
 [Gitee](https://gitee.com/haujet/CapsWriter)　|　[Github](https://github.com/HaujetZhao/CapsWriter) 
 
-# <img src="src/misc/icon.ico" alt="icon.ico" style="zoom: 50%;" /> Caps Writer
+
 
 ## 💡 简介
 
